@@ -10,13 +10,18 @@ export default function AppRouter() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-      <Route index element={<Navigate to="dashboard" />} />
+
+        {/* ِDefault Route*/}
+        <Route index element={<Navigate to="/dashboard" replace />} />
+
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="goals" element={<Goals />} />
         <Route path="goals/:id" element={<GoalDetails />} />
         <Route path="settings" element={<Settings />} />
         <Route path="*" element={<NotFound />} />
       </Route>
+
+      <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   );
 }
