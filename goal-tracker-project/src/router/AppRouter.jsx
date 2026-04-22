@@ -6,14 +6,20 @@ import GoalDetails from "../pages/GoalDetails";
 import Settings from "../pages/Settings";
 import NotFound from "../pages/NotFound";
 
-export default function AppRouter() {
+export default function AppRouter({ mode, setMode, direction }) {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
-
-        {/* ِDefault Route*/}
+      <Route
+        path="/"
+        element={
+          <Layout
+            mode={mode}
+            setMode={setMode}
+            direction={direction}
+          />
+        }
+      >
         <Route index element={<Navigate to="/dashboard" replace />} />
-
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="goals" element={<Goals />} />
         <Route path="goals/:id" element={<GoalDetails />} />
