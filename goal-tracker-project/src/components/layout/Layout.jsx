@@ -33,11 +33,36 @@ export default function Layout({
   const drawerWidth = collapsed ? 72 : 240;
   const NAVBAR_HEIGHT = 64;
 
-  const [goals, setGoals] = useState(() => {
-    const saved = localStorage.getItem("goals");
-    return saved ? JSON.parse(saved) : initialGoals;
+  // normalize function
+  const normalizeGoal = (g) => ({
+    ...g,
+    title:
+      typeof g.title === "string"
+        ? { en: g.title, fa: g.title }
+        : g.title,
+
+    description:
+      typeof g.description === "string"
+        ? { en: g.description, fa: g.description }
+        : g.description,
+
+    category: g.category || g.type?.toLowerCase() || "other",
+    status: g.status || "in-progress",
+    activityDates: g.activityDates || [],
   });
 
+  // goals state
+  const [goals, setGoals] = useState(() => {
+    const saved = localStorage.getItem("goals");
+
+    if (saved) {
+      return JSON.parse(saved).map(normalizeGoal);
+    }
+
+    return initialGoals.map(normalizeGoal);
+  });
+
+  // sync with localStorage
   useEffect(() => {
     localStorage.setItem("goals", JSON.stringify(goals));
   }, [goals]);
@@ -59,7 +84,6 @@ export default function Layout({
     <>
       <CssBaseline />
 
-      {/* BACKGROUND FIX (Dark Mode) */}
       <Box
         sx={{
           display: "flex",
@@ -67,24 +91,24 @@ export default function Layout({
           backgroundColor: theme.palette.background.default,
         }}
       >
-
         {/* NAVBAR */}
         <Navbar
           onMenuClick={handleMobileToggle}
           onCollapse={handleCollapseToggle}
           mode={mode}
-          // setMode={setMode}
-          onToggleMode={() => setMode(prev => prev === "light" ? "dark" : "light")}
+          onToggleMode={() =>
+            setMode((prev) => (prev === "light" ? "dark" : "light"))
+          }
           collapsed={collapsed}
         />
 
-        {/* 📱 MOBILE DRAWER */}
+        {/* MOBILE */}
         <Drawer
           key={theme.direction}
           variant="temporary"
           open={mobileOpen}
           onClose={handleMobileToggle}
-          anchor={theme.direction === "rtl" ? "right" : "left"}
+          anchor={anchor}
           disablePortal
           ModalProps={{ keepMounted: false }}
           sx={{
@@ -105,7 +129,7 @@ export default function Layout({
           />
         </Drawer>
 
-        {/* DESKTOP SIDEBAR */}
+        {/* DESKTOP */}
         {!isMobile && (
           <Box
             sx={{
@@ -130,7 +154,7 @@ export default function Layout({
           </Box>
         )}
 
-        {/* CONTENT AREA FIX */}
+        {/* CONTENT */}
         <Box
           component="main"
           sx={{

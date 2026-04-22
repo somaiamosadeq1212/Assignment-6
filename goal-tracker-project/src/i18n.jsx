@@ -27,11 +27,11 @@ i18n
             archivedGoals: "Archived Goals",
             settings: "Settings",
             categories: {
-              Exercise: "Exercise",
-              Study: "Study",
-              Work: "Work",
-              Personal: "Personal",
-              Other: "Other",
+              exercise: "Exercise",
+              study: "Study",
+              work: "Work",
+              personal: "Personal",
+              other: "Other",
             },
           },
 
@@ -70,13 +70,13 @@ i18n
             endDate: "End Date"
           },
 
-          categories: {
-            work: "Work",
-            personal: "Personal",
-            exercise: "Exercise",
-            study: "Study",
-            other: "Other"
-          },
+          // categories: {
+          //   work: "Work",
+          //   personal: "Personal",
+          //   exercise: "Exercise",
+          //   study: "Study",
+          //   other: "Other"
+          // },
 
           save: "Save",
           cancel: "Cancel",
@@ -111,11 +111,11 @@ i18n
             archivedGoals: "اهداف آرشیف شده",
             settings: "تنظیمات",
             categories: {
-              Exercise: "ورزش",
-              Study: "مطالعه",
-              Work: "کار",
-              Personal: "شخصی",
-              Other: "سایر",
+              exercise: "ورزش",
+              study: "مطالعه",
+              work: "کار",
+              personal: "شخصی",
+              other: "سایر",
             },
           },
 
@@ -154,13 +154,13 @@ i18n
             endDate: "تاریخ پایان"
           },
 
-          categories: {
-            work: "کاری",
-            personal: "شخصی",
-            exercise: "ورزش",
-            study: "مطالعه",
-            other: "سایر"
-          },
+          // categories: {
+          //   work: "کاری",
+          //   personal: "شخصی",
+          //   exercise: "ورزش",
+          //   study: "مطالعه",
+          //   other: "سایر"
+          // },
 
           save: "ذخیره",
           cancel: "لغو",

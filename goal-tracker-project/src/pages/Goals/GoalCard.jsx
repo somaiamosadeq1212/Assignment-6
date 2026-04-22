@@ -20,10 +20,18 @@ import StopIcon from "@mui/icons-material/Stop";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-const typeColors = {
-  Work: "primary",
-  Personal: "success",
-  Exercise: "error",
+// const typeColors = {
+//   Work: "primary",
+//   Personal: "success",
+//   Exercise: "error",
+// };
+
+const categoryColors = {
+  study: "primary",
+  work: "success",
+  personal: "warning",
+  exercise: "error",
+  other: "default",
 };
 
 export default function GoalCard({
@@ -52,6 +60,8 @@ export default function GoalCard({
     typeof goal.description === "string"
       ? goal.description
       : goal.description?.[i18n.language] || goal.description?.en;
+
+  const category = goal.category || goal.type?.toLowerCase() || "other";
 
   return (
     <Card
@@ -120,11 +130,11 @@ export default function GoalCard({
 
         {/* Type */}
         <Chip
-          label={t(`sidebar.categories.${goal.type}`)}
-          color={typeColors[goal.type] || "default"}
-          size="small"
-          sx={{ mt: 1.5, mb: 2 }}
-        />
+  label={t(`sidebar.categories.${category}`)}
+  color="primary"
+  size="small"
+  sx={{ mt: 1.5, mb: 2 }}
+/>
 
         {/* Description */}
         <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
