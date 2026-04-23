@@ -152,7 +152,7 @@ All goals and settings are saved in **localStorage**, so data remains after refr
 
 ## GitHub Repository
 
-https://github.com/somaiamosadeq1212/goal-tracker-project
+https://github.com/somaiamosadeq1212/Assignment-6
 
 ---
 
@@ -161,7 +161,7 @@ https://github.com/somaiamosadeq1212/goal-tracker-project
 ### Navigate into the project folder:
 
 ``` bash
-cd product-catalog
+cd goal-tracker-project
 ```
 
 ### Install dependencies:
