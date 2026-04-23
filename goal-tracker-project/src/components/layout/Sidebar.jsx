@@ -332,9 +332,9 @@ export default function Sidebar({
         {/* ALL */}
         <Tooltip title={t("sidebar.allGoals")} placement="right">
           <ListItemButton
-            sx={getItemStyle(categoryFilter === "All")}
+            sx={getItemStyle(categoryFilter === "all")}
             onClick={() => {
-              setCategoryFilter("All");
+              setCategoryFilter("all");
               navigate("/dashboard");
             }}
           >
@@ -388,9 +388,9 @@ export default function Sidebar({
 
         {/* ARCHIVED */}
         <ListItemButton
-          sx={getItemStyle(categoryFilter === "Archived")}
+          sx={getItemStyle(categoryFilter === "archived")}
           onClick={() => {
-            setCategoryFilter("Archived");
+            setCategoryFilter("archived");
             navigate("/dashboard");
           }}
         >

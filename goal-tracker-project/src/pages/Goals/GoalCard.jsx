@@ -26,13 +26,13 @@ import { useTranslation } from "react-i18next";
 //   Exercise: "error",
 // };
 
-const categoryColors = {
-  study: "primary",
-  work: "success",
-  personal: "warning",
-  exercise: "error",
-  other: "default",
-};
+// const categoryColors = {
+//   study: "primary",
+//   work: "success",
+//   personal: "warning",
+//   exercise: "error",
+//   other: "default",
+// };
 
 export default function GoalCard({
   goal,
@@ -130,11 +130,11 @@ export default function GoalCard({
 
         {/* Type */}
         <Chip
-  label={t(`sidebar.categories.${category}`)}
-  color="primary"
-  size="small"
-  sx={{ mt: 1.5, mb: 2 }}
-/>
+          label={t(`sidebar.categories.${category}`)}
+          color="primary"
+          size="small"
+          sx={{ mt: 1.5, mb: 2 }}
+        />
 
         {/* Description */}
         <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
@@ -186,7 +186,7 @@ export default function GoalCard({
               startIcon={isPaused ? <PlayArrowIcon /> : <StopIcon />}
               onClick={(e) => {
                 e.stopPropagation();
-                onToggleStatus(goal); 
+                onToggleStatus(goal);
               }}
             >
               {isPaused ? t("goal.resume") : t("goal.stop")}

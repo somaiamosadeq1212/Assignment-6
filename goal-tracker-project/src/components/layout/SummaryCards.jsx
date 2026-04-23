@@ -15,7 +15,7 @@ const XPLinearProgress = styled(LinearProgress)(({ theme }) => ({
   backgroundColor: "#e0e0e0",
   "& .MuiLinearProgress-bar": {
     borderRadius: 10,
-    background: "linear-gradient(90deg, #6a11cb 0%, #2575fc 100%)",
+    background: "linear-gradient(90deg, #425b88 0%, #304e82 100%)",
     transition: "width 1s ease-in-out",
   },
 }));
@@ -44,7 +44,7 @@ const CompletionProgress = styled(LinearProgress)(({ value }) => {
 });
 
 const AddGoalButton = styled(Button)(() => ({
-  background: "linear-gradient(90deg, #6a11cb 0%, #2575fc 100%)",
+  background: "linear-gradient(90deg, #495976 0%, #304e82 100%)",
   color: "#fff",
   fontWeight: "bold",
   fontSize: "16px",
@@ -53,7 +53,7 @@ const AddGoalButton = styled(Button)(() => ({
   boxShadow: "0px 4px 12px rgba(0,0,0,0.2)",
   transition: "all 0.3s ease",
   "&:hover": {
-    background: "linear-gradient(90deg, #2575fc 0%, #6a11cb 100%)",
+    background: "linear-gradient(90deg, #294e8e 0%, #341d4d 100%)",
     boxShadow: "0px 6px 16px rgba(0,0,0,0.3)",
     transform: "translateY(-2px)",
   },
@@ -107,11 +107,11 @@ export default function SummarySection({
         {/* XP */}
         <Card sx={{ flex: 1, minWidth: 200 }}>
           <CardContent>
-            <Typography color="text.secondary">⭐ {t("summary.xp")}</Typography>
+            <Typography color="text.primary">⭐ {t("summary.xp")}</Typography>
             <Typography variant="h5">{xp}</Typography>
 
             {/* XP Bar */}
-            <Box sx={{ mt: 1 }}>
+            <Box sx={{ mt: 1}}>
               <XPLinearProgress
                 variant="determinate"
                 value={progress > 100 ? 100 : progress}

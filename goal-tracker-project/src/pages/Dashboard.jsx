@@ -9,7 +9,7 @@ import { calculateXP } from "../utils/xpCalculator";
 import { calculateStreak } from "../utils/streakCalculator";
 import { useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
+import ConfirmDeleteDialog from "./ConfirmDeleteDialog";
 
 export default function Dashboard() {
 
@@ -24,30 +24,35 @@ export default function Dashboard() {
   }, [goals]);
 
   const filteredGoals = goals.filter((goal) => {
-    const title =
-      typeof goal.title === "string"
-        ? goal.title
-        : goal.title?.[i18n.language] || goal.title?.en || "";
+  const title =
+    typeof goal.title === "string"
+      ? goal.title
+      : goal.title?.[i18n.language] || goal.title?.en || "";
 
-    const description =
-      typeof goal.description === "string"
-        ? goal.description
-        : goal.description?.[i18n.language] || goal.description?.en || "";
+  const description =
+    typeof goal.description === "string"
+      ? goal.description
+      : goal.description?.[i18n.language] || goal.description?.en || "";
 
-    const matchesSearch =
-      title.toLowerCase().includes(search.toLowerCase()) ||
-      description.toLowerCase().includes(search.toLowerCase());
+  const matchesSearch =
+    title.toLowerCase().includes(search.toLowerCase()) ||
+    description.toLowerCase().includes(search.toLowerCase());
 
-    if (categoryFilter === "Archived") {
-      return matchesSearch && goal.status === "completed";
-    }
+  const filter = categoryFilter?.toLowerCase();
 
-    if (categoryFilter === "All") {
-      return matchesSearch;
-    }
+  const goalCategory =
+    (goal.category || goal.type || "").toLowerCase();
 
-    return matchesSearch && goal.type === categoryFilter;
-  });
+  // ALL
+  if (filter === "all") return matchesSearch;
+
+  // ARCHIVED
+  if (filter === "archived")
+    return matchesSearch && goal.status === "completed";
+
+  // CATEGORY
+  return matchesSearch && goalCategory === filter;
+});
 
   // Stats
   const totalGoals = goals.length;
@@ -55,6 +60,9 @@ export default function Dashboard() {
   const pendingGoals = totalGoals - completedGoals;
   const streak = calculateStreak(goals);
   const totalXP = calculateXP(goals, streak);
+
+  const [deleteOpen, setDeleteOpen] = useState(false);
+ const [selectedGoalId, setSelectedGoalId] = useState(null);
 
   // Handlers
   const handleAddGoal = () => {
@@ -69,9 +77,25 @@ export default function Dashboard() {
     setFormOpen(true);
   };
 
-  const handleDelete = (id) => {
-    setGoals(goals.filter((g) => g.id !== id));
-  };
+  // const handleDelete = (id) => {
+  //   setGoals(goals.filter((g) => g.id !== id));
+  // };
+
+  const handleDeleteClick = (id) => {
+  setSelectedGoalId(id);
+  setDeleteOpen(true);
+};
+
+const handleConfirmDelete = () => {
+  setGoals((prev) => prev.filter((g) => g.id !== selectedGoalId));
+  setDeleteOpen(false);
+  setSelectedGoalId(null);
+};
+
+const handleCancelDelete = () => {
+  setDeleteOpen(false);
+  setSelectedGoalId(null);
+};
 
   const handleToggleComplete = (goal) => {
     const today = new Date().toISOString().split("T")[0];
@@ -148,27 +172,6 @@ export default function Dashboard() {
     );
   };
 
-  useEffect(() => {
-    const migratedGoals = goals.map((g) => {
-      if (typeof g.title === "object") return g;
-
-      return {
-        ...g,
-        title: {
-          en: g.title || "",
-          fa: g.title || "",
-        },
-        description: {
-          en: g.description || "",
-          fa: g.description || "",
-        },
-        status: g.status || "in-progress",
-      };
-    });
-
-    setGoals(migratedGoals);
-  }, []);
-
   return (
     <Box sx={{ display: "flex", width: "100%" }}>
 
@@ -211,7 +214,7 @@ export default function Dashboard() {
                   key={goal.id}
                   goal={goal}
                   onEdit={handleEdit}
-                  onDelete={handleDelete}
+                  onDelete={handleDeleteClick}
                   onToggleComplete={handleToggleComplete}
                   onToggleStatus={handleToggleStatus}
                 />
@@ -229,6 +232,12 @@ export default function Dashboard() {
           setFormData={setFormData}
         />
       </Box>
+
+      <ConfirmDeleteDialog
+  open={deleteOpen}
+  onCancel={handleCancelDelete}
+  onConfirm={handleConfirmDelete}
+/>
     </Box>
   );
 }

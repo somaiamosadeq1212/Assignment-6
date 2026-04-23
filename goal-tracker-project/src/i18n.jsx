@@ -70,14 +70,6 @@ i18n
             endDate: "End Date"
           },
 
-          // categories: {
-          //   work: "Work",
-          //   personal: "Personal",
-          //   exercise: "Exercise",
-          //   study: "Study",
-          //   other: "Other"
-          // },
-
           save: "Save",
           cancel: "Cancel",
 
@@ -153,14 +145,6 @@ i18n
             startDate: "تاریخ شروع",
             endDate: "تاریخ پایان"
           },
-
-          // categories: {
-          //   work: "کاری",
-          //   personal: "شخصی",
-          //   exercise: "ورزش",
-          //   study: "مطالعه",
-          //   other: "سایر"
-          // },
 
           save: "ذخیره",
           cancel: "لغو",
