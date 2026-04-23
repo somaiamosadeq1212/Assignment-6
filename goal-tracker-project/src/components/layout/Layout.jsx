@@ -173,6 +173,8 @@ export default function Layout({
                 setGoals,
                 search,
                 categoryFilter,
+                mode,
+                setMode,
               }}
             />
           </Container>
